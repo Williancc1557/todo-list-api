@@ -1,0 +1,53 @@
+{
+  "name": "todo-list-api",
+  "version": "1.0.0",
+  "main": "/src/main/server.ts",
+  "repository": "https://github.com/Williancc1557/todo-list-api",
+  "author": "Willian Cavalcanti Coelho",
+  "license": "MIT",
+  "scripts": {
+    "dev": "nodemon ./src/main/server.ts",
+    "start": "node dist/src/main/server.js",
+    "build": "tsc",
+    "test": "jest --passWithNoTests --silent --noStackTrace --RunInBand",
+    "test:verbose": "jest --passWithNoTests --runInBand",
+    "test:unit": "yarn test -- --watch -c jest-unit-config.js",
+    "test:integration": "yarn test -- --watch -c jest-integration-config.js",
+    "test:ci": "yarn test -- --coverage"
+  },
+  "devDependencies": {
+    "@techmmunity/eslint-config": "^5.2.4",
+    "@types/better-sqlite3": "^7.6.2",
+    "@types/express": "^4.17.14",
+    "@types/jest": "^29.2.0",
+    "@types/jsonwebtoken": "^8.5.9",
+    "@types/pino": "^7.0.5",
+    "@types/pino-http": "^5.8.1",
+    "@types/pino-pretty": "^4.7.5",
+    "@types/supertest": "^2.0.12",
+    "better-sqlite3": "^8.5.1",
+    "eslint": "^8.39.0",
+    "husky": "^8.0.1",
+    "jest": "^29.2.2",
+    "prettier": "^2.8.8",
+    "ts-jest": "^29.0.3",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "4.5.5"
+  },
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "fast-glob": "^3.2.12",
+    "fs": "^0.0.1-security",
+    "jsonwebtoken": "^8.5.1",
+    "mongodb": "^4.8.0",
+    "nodemon": "^3.0.1",
+    "pg": "^8.8.0",
+    "pino": "^8.3.0",
+    "pino-http": "^8.1.1",
+    "pino-pretty": "^8.1.0",
+    "supertest": "^6.3.1",
+    "typeorm": "^0.3.10",
+    "uid": "^2.0.1"
+  }
+}

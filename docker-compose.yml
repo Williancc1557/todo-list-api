@@ -1,0 +1,39 @@
+version: "3.8"
+
+services:
+  mongodb:
+    image: "mongo:latest"
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_DATABASE=database
+      - MONGODB_DATA_DIR=/data/db
+      - MONDODB_LOG_DIR=/dev/null
+    volumes:
+      - mongo:/data/db
+    networks:
+      - todo-api_network
+
+  api:
+    build:
+      context: "."
+      dockerfile: Dockerfile
+    container_name: todo_api
+    command: yarn dev
+    depends_on:
+      - mongodb
+    ports:
+      - 3000:3000
+    env_file:
+      - .env.docker
+    volumes:
+      - ./:/app/
+    networks:
+      - todo-api_network
+
+volumes:
+  mongo:
+
+networks:
+  todo-api_network:
+    driver: bridge
