@@ -1,5 +1,5 @@
 import type { TaskModel } from "../../domain/models/task";
-import type { FindOnlyNotChecked } from "../../domain/usecase/find-only-not-checked";
+import type { FindOnlyNotChecked } from "../../domain/usecase/find-only-checked";
 import type { FindRepository } from "../protocols/find-repository";
 
 export class DbFindOnlyNotChecked implements FindOnlyNotChecked {
