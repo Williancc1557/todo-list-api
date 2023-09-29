@@ -1,27 +1,21 @@
 import type { Express } from "express";
 import { Router } from "express";
 import fg from "fast-glob";
+import { logger } from "../../utils/logger";
 
 export const setupRoutes = (app: Express) => {
   const router = Router();
 
-  app.use(router);
+  app.use("/api", router);
 
   fg.sync([
-    "**/src/main/routes/**-router.ts",
-    "**/src/main/routes/**-router/**-router.ts",
+    "**/src/main/routers/**-router.*",
+    "**/src/main/routers/**/**-router/**-router.*",
   ]).map(async (file) => {
     const fileList = file.split("/");
     // eslint-disable-next-line @typescript-eslint/no-magic-numbers
     const index = fileList.length - 1;
-    console.log(`Loading the file router ${fileList[index]} ...`);
-
-    (
-      await import(
-        `../../../${
-          process.env.JEST_WORKER_ID ? file : file.replace("ts", "js")
-        }`
-      )
-    ).default(router);
+    logger.info(`Loading the file router ${fileList[index]} ...`);
+    (await import(`../../../${file}`)).default(router);
   });
 };
