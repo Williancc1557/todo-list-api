@@ -5,6 +5,6 @@ export interface FindRepositoryInput {
 }
 
 export interface FindRepository {
-  findOne: (data?: FindRepositoryInput) => Promise<TaskModel>;
+  findOne: (data: FindRepositoryInput) => Promise<TaskModel>;
   findAll: () => Promise<Array<TaskModel>>;
 }

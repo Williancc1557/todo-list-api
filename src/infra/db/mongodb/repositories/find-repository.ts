@@ -1,3 +1,4 @@
+import { ObjectId } from "mongodb";
 import type {
   FindRepository,
   FindRepositoryInput,
@@ -10,9 +11,7 @@ export class MongoFindRepository implements FindRepository {
     const taskCollection = await mongoHelper.getCollection("task");
 
     const task = await taskCollection.findOne<TaskModel>({
-      $where: {
-        _id: data._id,
-      },
+      _id: new ObjectId(data._id),
     });
 
     return task;
