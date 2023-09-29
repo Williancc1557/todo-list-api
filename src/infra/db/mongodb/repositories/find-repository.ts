@@ -24,4 +24,17 @@ export class MongoFindRepository implements FindRepository {
 
     return tasks;
   }
+
+  public async findOnlyNotChecked(): Promise<Array<TaskModel>> {
+    const taskCollection = await mongoHelper.getCollection("task");
+
+    const tasks = await taskCollection
+      .find<TaskModel>({
+        // eslint-disable-next-line @typescript-eslint/naming-convention
+        finished: false,
+      })
+      .toArray();
+
+    return tasks;
+  }
 }

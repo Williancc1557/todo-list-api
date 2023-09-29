@@ -7,4 +7,5 @@ export interface FindRepositoryInput {
 export interface FindRepository {
   findOne: (data: FindRepositoryInput) => Promise<TaskModel>;
   findAll: () => Promise<Array<TaskModel>>;
+  findOnlyNotChecked: () => Promise<Array<TaskModel>>;
 }
