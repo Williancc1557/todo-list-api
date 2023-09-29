@@ -6,7 +6,7 @@ import { logger } from "../../utils/logger";
 export const setupRoutes = (app: Express) => {
   const router = Router();
 
-  app.use("/api", router);
+  app.use(router);
 
   fg.sync([
     "**/src/main/routers/**-router.*",
