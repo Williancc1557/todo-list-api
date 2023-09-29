@@ -38,4 +38,18 @@ export const mongoHelper = {
       return null;
     }
   },
+  mapArray(accounts: Array<any>): any {
+    try {
+      return accounts.map((account) => {
+        const { _id, ...accountWithoudId } = account;
+
+        return {
+          ...accountWithoudId,
+          id: _id.toString(),
+        };
+      });
+    } catch {
+      return null;
+    }
+  },
 };

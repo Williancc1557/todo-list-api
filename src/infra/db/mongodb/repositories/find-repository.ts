@@ -14,7 +14,7 @@ export class MongoFindRepository implements FindRepository {
       _id: new ObjectId(data._id),
     });
 
-    return task;
+    return mongoHelper.map(task);
   }
 
   public async findAll(): Promise<Array<TaskModel>> {
@@ -22,7 +22,7 @@ export class MongoFindRepository implements FindRepository {
 
     const tasks = await taskCollection.find<TaskModel>({}).toArray();
 
-    return tasks;
+    return mongoHelper.mapArray(tasks);
   }
 
   public async findOnlyNotChecked(): Promise<Array<TaskModel>> {
@@ -35,6 +35,6 @@ export class MongoFindRepository implements FindRepository {
       })
       .toArray();
 
-    return tasks;
+    return mongoHelper.mapArray(tasks);
   }
 }
