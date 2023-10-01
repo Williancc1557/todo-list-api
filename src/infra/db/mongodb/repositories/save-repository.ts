@@ -10,12 +10,14 @@ export class MongoSaveRepository implements SaveRepository {
     const taskCollection = await mongoHelper.getCollection("task");
 
     const { insertedId } = await taskCollection.insertOne({
-      data,
+      ...data,
       finished: false,
     });
 
-    return taskCollection.findOne<TaskModel>({
-      _id: insertedId,
-    });
+    return mongoHelper.map(
+      await taskCollection.findOne<TaskModel>({
+        _id: insertedId,
+      })
+    );
   }
 }
