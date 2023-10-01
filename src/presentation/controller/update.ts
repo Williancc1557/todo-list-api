@@ -7,7 +7,8 @@ export class UpdateController implements Controller {
   public constructor(private readonly update: Update) {}
 
   public async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
-    const { body } = httpRequest;
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { accountId, ...body } = httpRequest.body;
 
     const taskUpdated = this.update.update({
       id: httpRequest.params.id,

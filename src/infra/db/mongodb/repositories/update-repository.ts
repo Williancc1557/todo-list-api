@@ -17,7 +17,11 @@ export class MongoUpdateRepository implements UpdateRepository {
       {
         _id: new ObjectId(id),
       },
-      dataToUpdate
+      {
+        $set: {
+          ...dataToUpdate,
+        },
+      }
     );
 
     return taskCollection.findOne<TaskModel>({
