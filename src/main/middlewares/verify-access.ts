@@ -7,15 +7,17 @@ export const verifyAccess = async (
   res: Response,
   next: NextFunction
 ) => {
-  const notNeedAccess = ["/key/message"];
-  for (const path of notNeedAccess) {
-    if (req.path.includes(path)) return next();
-  }
+  // const notNeedAccess = [""];
+
+  // for (const path of notNeedAccess) {
+  //   if (req.path.includes(path)) return next();
+  // }
 
   const { body, statusCode } = unauthorized();
 
   try {
     const accessToken = req.headers.accesstoken as string;
+
     if (!accessToken) return res.status(statusCode).json(body);
 
     jwt.verify(accessToken, env.secretAccessTokenJwt);
@@ -23,7 +25,7 @@ export const verifyAccess = async (
     const info = jwt.decode(accessToken) as any;
     req.accountId = info.accountId;
     next();
-  } catch {
+  } catch (err) {
     return res.status(statusCode).json(body);
   }
 };

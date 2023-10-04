@@ -8,4 +8,6 @@ export interface TaskModel {
   description?: string;
 
   finished?: boolean;
+
+  userId: string;
 }

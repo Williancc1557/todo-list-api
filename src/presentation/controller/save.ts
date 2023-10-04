@@ -7,11 +7,13 @@ export class SaveController implements Controller {
   public constructor(private readonly save: Save) {}
 
   public async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
-    const { description, name } = httpRequest.body;
+    const { description, name, accountId } = httpRequest.body;
+    console.log(accountId);
 
     const task = await this.save.save({
       name,
       description,
+      userId: accountId,
     });
 
     return ok(task);
