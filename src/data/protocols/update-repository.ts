@@ -2,6 +2,7 @@ import type { TaskModel } from "../../domain/models/task";
 
 interface UpdateRepositoryInputId {
   id: string;
+  userId: string;
 }
 
 export type UpdateRepositoryInput = Partial<

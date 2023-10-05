@@ -16,6 +16,7 @@ export class MongoUpdateRepository implements UpdateRepository {
     const { upsertedId } = await taskCollection.updateOne(
       {
         _id: new ObjectId(id),
+        userId: dataToUpdate.userId,
       },
       {
         $set: {

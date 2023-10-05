@@ -12,6 +12,7 @@ export class UpdateController implements Controller {
 
     const taskUpdated = this.update.update({
       id: httpRequest.params.id,
+      userId: httpRequest.body.accountId,
       ...body,
     });
 

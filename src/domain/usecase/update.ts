@@ -2,6 +2,7 @@ import type { TaskModel } from "../models/task";
 
 interface UpdateInputId {
   id: string;
+  userId: string;
 }
 
 export type UpdateInput = Partial<Omit<TaskModel, "_id"> & UpdateInputId>;
