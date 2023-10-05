@@ -5,7 +5,7 @@ import { FindAllController } from "../../presentation/controller/find-all";
 export const makeFindAllController = () => {
   const findAllRepository = new MongoFindRepository();
   const dbFindAll = new DbFindAll(findAllRepository);
-  const findAllController = new FindAllController(dbFindAll);
+  const controller = new FindAllController(dbFindAll);
 
-  return findAllController;
+  return new LogControllerDecorator(controller);
 };

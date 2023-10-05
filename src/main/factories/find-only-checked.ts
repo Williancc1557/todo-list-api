@@ -7,5 +7,5 @@ export const makeFindOnlyCheckedController = () => {
   const dbFindOnlyChecked = new DbFindOnlyChecked(mongoFindRepository);
   const controller = new FindOnlyCheckedController(dbFindOnlyChecked);
 
-  return controller;
+  return new LogControllerDecorator(controller);
 };
