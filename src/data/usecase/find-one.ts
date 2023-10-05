@@ -8,6 +8,7 @@ export class DbFindOne implements FindOne {
   public async find(data: FindOneInput): Promise<TaskModel> {
     return this.findRepository.findOne({
       _id: data.id,
+      userId: data.userId,
     });
   }
 }

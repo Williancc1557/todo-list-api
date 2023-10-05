@@ -10,6 +10,7 @@ export class FindOneController implements Controller {
   public async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
     const data = await this.findOne.find({
       id: httpRequest.params.id,
+      userId: httpRequest.body.accountId,
     });
 
     return ok(data);

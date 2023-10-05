@@ -8,7 +8,6 @@ export class SaveController implements Controller {
 
   public async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
     const { description, name, accountId } = httpRequest.body;
-    console.log(accountId);
 
     const task = await this.save.save({
       name,

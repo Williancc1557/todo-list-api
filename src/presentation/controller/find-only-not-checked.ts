@@ -8,7 +8,9 @@ export class FindOnlyNotCheckedController implements Controller {
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   public async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
-    const data = await this.findOnlyNotChecked.find();
+    const data = await this.findOnlyNotChecked.find({
+      userId: httpRequest.body.accountId,
+    });
 
     return ok(data);
   }
