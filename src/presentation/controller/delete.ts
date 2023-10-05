@@ -10,6 +10,7 @@ export class DeleteController implements Controller {
     return ok(
       this.del.delete({
         _id: httpRequest.params.id,
+        userId: httpRequest.body.accountId,
       })
     );
   }

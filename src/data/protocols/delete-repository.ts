@@ -1,3 +1,8 @@
+export interface DeleteRepositoryInput {
+  id: string;
+  userId: string;
+}
+
 export interface DeleteRepository {
-  delete: (id: string) => Promise<void>;
+  delete: (data: DeleteRepositoryInput) => Promise<void>;
 }
