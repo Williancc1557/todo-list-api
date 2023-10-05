@@ -1,24 +1,26 @@
 import type { Express } from "express";
 import { Router } from "express";
-import fg from "fast-glob";
+import { deleteRouter } from "../routers/delete-router";
+import { findRouter } from "../routers/find-all-router";
+import { findByIdRouter } from "../routers/find-one-router";
+import { findOnlyCheckedsRouter } from "../routers/find-only-checked-router";
+import { findOnlyNotCheckedsRouter } from "../routers/find-only-not-checked-router";
+import { saveRouter } from "../routers/save-router";
+import { updateRouter } from "../routers/update-router";
 import { logger } from "../../utils/logger";
-import env from "./env";
 
 export const setupRoutes = (app: Express) => {
   const router = Router();
 
   app.use(router);
 
-  const fileRule =
-    env.state === "production"
-      ? "**/main/routers/**/**-router.js"
-      : "**/src/main/routers/**-router.ts";
+  deleteRouter(router);
+  findRouter(router);
+  findByIdRouter(router);
+  findOnlyCheckedsRouter(router);
+  findOnlyNotCheckedsRouter(router);
+  saveRouter(router);
+  updateRouter(router);
 
-  fg.sync([fileRule]).map(async (file) => {
-    const fileList = file.split("/");
-    // eslint-disable-next-line @typescript-eslint/no-magic-numbers
-    const index = fileList.length - 1;
-    logger.info(`Loading the file router ${fileList[index]} ...`);
-    (await import(`../../../${file}`)).default(router);
-  });
+  logger.info("All routers are set up");
 };
