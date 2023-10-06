@@ -1,4 +1,5 @@
 import { DbFindOnlyNotChecked } from "../../data/usecase/find-only-not-checked";
+import { LogControllerDecorator } from "../../decorators/log";
 import { MongoFindRepository } from "../../infra/db/mongodb/repositories/find-repository";
 import { FindOnlyNotCheckedController } from "../../presentation/controller/find-only-not-checked";
 
@@ -7,5 +8,5 @@ export const makeFindOnlyNotCheckedController = () => {
   const dbFindOnlyNotChecked = new DbFindOnlyNotChecked(mongoFindRepository);
   const controller = new FindOnlyNotCheckedController(dbFindOnlyNotChecked);
 
-  return controller;
+  return new LogControllerDecorator(controller);
 };
