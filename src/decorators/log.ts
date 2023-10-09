@@ -29,6 +29,16 @@ export class LogControllerDecorator implements Controller {
       logger.warn(bodyResponse);
     }
 
+    const indexExists = await logsCollection.indexExists("expiresIn_1");
+
+    if (!indexExists) {
+      const ONE_WEEK = 604800;
+      await logsCollection.createIndex(
+        { expiresIn: 1 },
+        { expireAfterSeconds: ONE_WEEK }
+      );
+    }
+
     await logsCollection.insertOne({
       createdAt: new Date(),
       statusCode: controller.statusCode,
@@ -38,7 +48,7 @@ export class LogControllerDecorator implements Controller {
       userSystemOperation: httpRequest.header["sec-ch-ua-platform"],
       url: httpRequest.header.url,
       method: httpRequest.header.method,
-      ip: httpRequest.header.ip,
+      expiresIn: new Date(),
     });
 
     return controller;
